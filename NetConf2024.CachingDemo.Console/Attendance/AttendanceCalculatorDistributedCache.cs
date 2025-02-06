@@ -17,7 +17,7 @@ public class AttendanceCalculatorDistributedCache(IDistributedCache distributedC
             await Task.Delay(2000);
             value = new Random().Next(0, 100);
             cachedArr = JsonSerializer.SerializeToUtf8Bytes(value);
-            await distributedCache.SetAsync(KEY, cachedArr, new() { AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(20) });
+            await distributedCache.SetAsync(KEY, cachedArr, new() { AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(20) });
             return value;
         }
         else

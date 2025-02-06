@@ -21,8 +21,8 @@ using IHost host = Host.CreateDefaultBuilder()
         {
             options.DefaultEntryOptions = new()
             {
-                LocalCacheExpiration = TimeSpan.FromMinutes(20),
-                Expiration = TimeSpan.FromMinutes(20),
+                LocalCacheExpiration = TimeSpan.FromSeconds(20),
+                Expiration = TimeSpan.FromSeconds(20),
             };
         });
 #pragma warning restore EXTEXP0018
@@ -42,12 +42,11 @@ await Calculate(AttendanceCalculatorType.HYBRID_CACHE);
 async Task Calculate(AttendanceCalculatorType type)
 {
     var attendanceCalculator = host.Services.GetRequiredKeyedService<IAttendanceCalculator>(type);
-    var stopwatch = new Stopwatch();
     var executionTimes = new List<long>();
 
     for (int i = 0; i < NUM_ITERS; i++)
     {
-        stopwatch.Restart();
+        var stopwatch = Stopwatch.StartNew();
         _ = await attendanceCalculator.Count();
         stopwatch.Stop();
 
