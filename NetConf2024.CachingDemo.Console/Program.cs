@@ -21,8 +21,8 @@ using IHost host = Host.CreateDefaultBuilder()
         {
             options.DefaultEntryOptions = new()
             {
-                LocalCacheExpiration = TimeSpan.FromSeconds(20),
-                Expiration = TimeSpan.FromSeconds(20),
+                LocalCacheExpiration = TimeSpan.FromSeconds(120),
+                Expiration = TimeSpan.FromSeconds(120),
             };
         });
 #pragma warning restore EXTEXP0018
